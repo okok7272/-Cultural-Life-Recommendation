@@ -27,7 +27,7 @@ cur = conn.cursor()
 door_type = 'festibal'
 
 script = """ 
-DELETE FROM outdoor WHERE door_type = 'festibal' AND region = "서울";
+DELETE FROM outdoor WHERE door_type = 'festibal' AND region = "부산";
 """
     # cur.executescript(script)
     # script2 = """ 
@@ -48,8 +48,11 @@ driver.get('https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=
 driver.find_element(by=By.CSS_SELECTOR, value="#main_pack > div.sc_new.cs_common_module.case_list.color_1._cs_festival_list > div.cm_content_wrap > div > div > div.cm_tap_area.type_festival > div > div.type_scroll > ul > li:nth-child(1) > a > span.ico_check_wrap").click()
 driver.implicitly_wait(100)
 WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#main_pack > div.sc_new.cs_common_module.case_list.color_1._cs_festival_list > div.cm_content_wrap > div > div > div.cm_tap_area.type_festival > div > div.type_scroll > ul > li:nth-child(1) > a > span.ico_check_wrap"))).click()
+driver.implicitly_wait(100)
 
 WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.LINK_TEXT, "부산"))).click()
+driver.implicitly_wait(100)
+
 driver.find_element(by=By.LINK_TEXT, value="부산").click()
 driver.implicitly_wait(100)
 

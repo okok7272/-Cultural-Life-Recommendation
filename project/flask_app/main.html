@@ -4,21 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>"문화생활 즐기기"</title>
 </head>
 <body>
-    <select class="form-select" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+  <select name="CPinfo" size="1">
+    <option value="" selected></option>
+    <!-- <%
+     // db에서 정보 얻어와 테이블에 출력하기
+     Connection con = null;
+     PreparedStatement pstmt = null;
+     ResultSet rs = null;
+     try {
+      con = DBConnection.getCon();
+      String sql = "SELECT 칼럼명 FROM 테이블명 GROUP BY칼럼명 ORDER BY 칼럼명";
+
+
+      pstmt = con.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      while (rs.next()) {
+       String BMT_CP = rs.getString("BMT_CP");
+    %> -->
+
+    <option value=<%=칼럼명%>><%=칼럼명%></option>
+    <!-- <%
+     }
+     } catch (SQLException se) {
+      System.out.println(se.getMessage());
+     } finally {
+      try {
+       if (rs != null)
+        rs.close();
+       if (pstmt != null)
+        pstmt.close();
+       if (con != null)
+        con.close();
+      } catch (SQLException se) {
+       System.out.println(se.getMessage());
+      }
+
+     }
+    %> -->
+</select>
 
 
     </body>

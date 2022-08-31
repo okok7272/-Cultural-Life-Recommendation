@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import randint, uniform
 
-
+#exfes.db
 dbpath = 'project\exfes.db'
 
 conn = sqlite3.connect(dbpath)
@@ -40,6 +40,8 @@ def typeEnc(x):
     else:
         x=2
     return x
+culture = culture.drop(columns=['end_period', 'start_period'])
+
 culture['door']= culture['door_type'].apply(typeEnc)
 culcsv = culture.copy()
 train = culcsv.copy()
@@ -55,11 +57,12 @@ pipe = make_pipeline(
     # TargetEncoder: 범주형 변수 인코더로, 타겟값을 특성의 범주별로 평균내어 그 값으로 인코딩
     TargetEncoder(), 
     SimpleImputer(), 
-    RandomForestClassifier(max_depth = 10, n_jobs=-1, random_state=2)
+    RandomForestClassifier(min_samples_leaf=4, n_jobs=-1, random_state=2)
 )
+
 dists = {
     'targetencoder__smoothing': [2.,20.,50.,60.,100.,500.,1000.], # int로 넣으면 error(bug)
-    'targetencoder__min_samples_leaf': randint(1, 3),     
+    'targetencoder__min_samples_leaf': randint(1, 10),     
     'simpleimputer__strategy': ['mean', 'median'], 
     'randomforestclassifier__n_estimators': randint(10, 200), 
     'randomforestclassifier__max_depth': [5, 10, 15, 20, None], 
@@ -77,6 +80,6 @@ model = RandomizedSearchCV(
 )
 
 model.fit(X_train,y_train)
-
 with open('model.pkl','wb') as pickle_file:
     pickle.dump(model, pickle_file)
+

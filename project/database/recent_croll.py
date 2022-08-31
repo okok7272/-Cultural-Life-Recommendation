@@ -7,11 +7,12 @@ import subprocess
 import time
 import schedule
 def recentjob():
-    subprocess.call("data_search_exhibit.py",shell=True)
-    subprocess.call("data_search_festibal_busan.py",shell=True)
-    subprocess.call("data_search_festibal_etc.py",shell=True)
-    subprocess.call("data_search_festibal_gyeonggi.py",shell=True)
-    subprocess.call("data_search_festibal.py",shell=True)
+    # subprocess.call("data_search_exhibit.py",shell=True)
+    # subprocess.call("data_search_festibal_busan.py",shell=True)
+    # subprocess.call("data_search_festibal_etc.py",shell=True)
+    # subprocess.call("data_search_festibal_gyeonggi.py",shell=True)
+    # subprocess.call("data_search_festibal.py",shell=True)
+    print('잠시 운행 정지')
 
 schedule.every().day.at("10:30").do(recentjob)
 
