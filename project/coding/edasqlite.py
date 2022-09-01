@@ -6,6 +6,17 @@ import pymysql
 from sqlalchemy import create_engine
 from datetime import datetime
 
+# HOST = 'cluster0.xcojk3n.mongodb.net'
+# USER = 'whaleuser'
+# PASSWORD = 'whale1234'
+# DATABASE_NAME = 'myFirstDatabase'
+# COLLECTION_NAME = 'octokit_repos'
+# MONGO_URI = f"mongodb+srv://{USER}:{PASSWORD}@{HOST}/{DATABASE_NAME}?retryWrites=true&w=majority"
+
+# client = MongoClient(MONGO_URI)
+# collection =client[DATABASE_NAME][COLLECTION_NAME]
+# names = {}
+
 dbpath = 'project\exfes.db'
 
 conn = sqlite3.connect(dbpath)

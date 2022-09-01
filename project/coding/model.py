@@ -14,11 +14,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import randint, uniform
 
-#exfes.db
-# dbpath = 'project\exfes.db'
+dbpath = 'project\exfes.db'
 
-# conn = sqlite3.connect(dbpath)
-# cur = conn.cursor()
+conn = sqlite3.connect(dbpath)
+cur = conn.cursor()
+culture = pd.read_sql("SELECT * FROM outdoor;",conn, index_col=None)
 
 # culture = pd.read_sql("SELECT * FROM outdoor;",conn, index_col=None)
 
@@ -45,6 +45,7 @@ from scipy.stats import randint, uniform
 # culture['door']= culture['door_type'].apply(typeEnc)
 culcsv = culture.copy()
 train = culcsv.copy()
+train = train.drop(column=['end_period','start.preiod'])
 target = 'door'
 train, val = train_test_split(train ,train_size=0.80,test_size = 0.20, stratify=train[target],random_state=2)
 
