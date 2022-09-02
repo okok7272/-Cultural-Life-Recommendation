@@ -8,51 +8,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"문화생활 즐기기"</title>
+    <title>cultureLife</title>
 </head>
 <body>
-  <select name="CPinfo" size="1">
-    <option value="" selected></option>
-    {% for content in culture %}
-    <option value=content.title >{{content.title}}</option>
-    {% endfor %}
-    <!-- <%
-     // db에서 정보 얻어와 테이블에 출력하기
-     Connection con = null;
-     PreparedStatement pstmt = null;
-     ResultSet rs = null;
-     try {
-      con = DBConnection.getCon();
-      String sql = "SELECT 칼럼명 FROM 테이블명 GROUP BY칼럼명 ORDER BY 칼럼명";
+  <form method="POST" id="authForm">
+    <div>
+        <h3> 검색 </h3>
+        <p>
+            <label for="regi_id">행사 이름</label>
+            <input type="text " id="title_name" name="regi_id" >
+        </p>
+        <input type="submit" name="submit" value="submit" style="WIDTH: 183pt"/>
+ 
+    </div>
+  </form>
 
-
-      pstmt = con.prepareStatement(sql);
-      rs = pstmt.executeQuery();
-      while (rs.next()) {
-       String BMT_CP = rs.getString("BMT_CP");
-    %> -->
-<!-- 
-    <option value=<%=칼럼명%>><%=칼럼명%></option> -->
-    <!-- <%
-     }
-     } catch (SQLException se) {
-      System.out.println(se.getMessage());
-     } finally {
-      try {
-       if (rs != null)
-        rs.close();
-       if (pstmt != null)
-        pstmt.close();
-       if (con != null)
-        con.close();
-      } catch (SQLException se) {
-       System.out.println(se.getMessage());
-      }
-
-     }
-    %> -->
-</select>
-
-
-    </body>
+</body>
 </html>

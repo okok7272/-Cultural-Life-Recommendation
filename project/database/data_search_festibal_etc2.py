@@ -29,7 +29,7 @@ options.add_experimental_option("excludeSwitches", ["enable-logging"])
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
 driver.implicitly_wait(100000)
 driver.get('https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bk00&qvt=0&query=%EC%B6%95%EC%A0%9C')
-
+door_type='festibal'
 #경남
 
 driver.find_element(by=By.CSS_SELECTOR,value="#main_pack > div.sc_new.cs_common_module.case_list.color_1._cs_festival_list > div.cm_content_wrap > div > div > div.cm_tap_area.type_festival > div > div.type_scroll > ul > li:nth-child(1) > a > span.ico_check_wrap").click()

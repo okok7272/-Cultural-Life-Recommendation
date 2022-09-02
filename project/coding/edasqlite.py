@@ -51,4 +51,5 @@ def typeEnc(x):
 
 culture['door']= culture['door_type'].apply(typeEnc)
 
-sqlcon = sqlite3.connect('culture.db')
+sqlcon = sqlite3.connect('project/culture.db')
+culture.to_sql('outdoor',sqlcon)

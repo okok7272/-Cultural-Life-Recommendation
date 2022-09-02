@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import randint, uniform
 
-dbpath = 'project\exfes.db'
+dbpath = 'project\culture.db'
 
 conn = sqlite3.connect(dbpath)
 cur = conn.cursor()
@@ -34,18 +34,12 @@ culture = pd.read_sql("SELECT * FROM outdoor;",conn, index_col=None)
 # culture[['eyear','emonth','eday']]= culture['end_period'].str.split('.',expand=True)
 # culture[['syear','smonth','sday']]= culture[['syear','smonth','sday']].apply(pd.to_numeric)
 # culture[['eyear','emonth','eday']]= culture[['eyear','emonth','eday']].apply(pd.to_numeric)
-# def typeEnc(x):
-#     if x =='festibal':
-#         x=1
-#     else:
-#         x=2
-#     return x
-# culture = culture.drop(columns=['end_period', 'start_period'])
 
-# culture['door']= culture['door_type'].apply(typeEnc)
+culture = culture.drop(columns=['start_period', 'end_period'])
+
 culcsv = culture.copy()
 train = culcsv.copy()
-train = train.drop(column=['end_period','start.preiod'])
+
 target = 'door'
 train, val = train_test_split(train ,train_size=0.80,test_size = 0.20, stratify=train[target],random_state=2)
 
@@ -56,14 +50,13 @@ y_val = val[target]
 
 pipe = make_pipeline(
     # TargetEncoder: 범주형 변수 인코더로, 타겟값을 특성의 범주별로 평균내어 그 값으로 인코딩
-    TargetEncoder(), 
+    TargetEncoder(min_samples_leaf=4,smoothing=4.0), 
     SimpleImputer(), 
     RandomForestClassifier(min_samples_leaf=4, n_jobs=-1, random_state=2)
 )
 
 dists = {
-    'targetencoder__smoothing': [2.,20.,50.,60.,100.,500.,1000.], # int로 넣으면 error(bug)
-    'targetencoder__min_samples_leaf': randint(1, 10),     
+    
     'simpleimputer__strategy': ['mean', 'median'], 
     'randomforestclassifier__n_estimators': randint(10, 200), 
     'randomforestclassifier__max_depth': [5, 10, 15, 20, None], 
@@ -81,6 +74,6 @@ model = RandomizedSearchCV(
 )
 
 model.fit(X_train,y_train)
-with open('model.pkl','wb') as pickle_file:
+with open('project/model.pkl','wb') as pickle_file:
     pickle.dump(model, pickle_file)
 
